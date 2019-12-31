@@ -1,0 +1,124 @@
+# Copyright (c) 2019 Hanspeter Portner (dev@open-music-kontrollers.ch)
+#
+# This is free software: you can redistribute it and/or modify
+# it under the terms of the Artistic License 2.0 as published by
+# The Perl Foundation.
+#
+# This source is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# Artistic License 2.0 for more details.
+#
+# You should have received a copy of the Artistic License 2.0
+# along the source as a COPYING file. If not, obtain it from
+# http://www.perlfoundation.org/artistic_license_2_0.
+
+@prefix owl:			<http://www.w3.org/2002/07/owl#> .
+@prefix xsd:			<http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf:			<http://xmlns.com/foaf/0.1/> .
+@prefix doap:			<http://usefulinc.com/ns/doap#> .
+@prefix rdf:			<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: 		<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix lv2:			<http://lv2plug.in/ns/lv2core#> .
+@prefix atom:			<http://lv2plug.in/ns/ext/atom#> .
+@prefix midi:			<http://lv2plug.in/ns/ext/midi#> .
+@prefix urid:			<http://lv2plug.in/ns/ext/urid#> .
+@prefix units:		<http://lv2plug.in/ns/extensions/units#> .
+@prefix state:		<http://lv2plug.in/ns/ext/state#> .
+@prefix rsz:      <http://lv2plug.in/ns/ext/resize-port#> .
+@prefix bufsz:		<http://lv2plug.in/ns/ext/buf-size#> .
+@prefix patch:		<http://lv2plug.in/ns/ext/patch#> .
+@prefix log:			<http://lv2plug.in/ns/ext/log#> .
+
+@prefix lic:			<http://opensource.org/licenses/> .
+@prefix omk:			<http://open-music-kontrollers.ch/ventosus#> .
+@prefix proj:			<http://open-music-kontrollers.ch/lv2/> .
+@prefix shells_bells:		<http://open-music-kontrollers.ch/lv2/shells_bells#> .
+
+# Maintainer
+omk:me
+	a foaf:Person ;
+	foaf:name "Hanspeter Portner" ;
+	foaf:mbox <mailto:dev@open-music-kontrollers.ch> ;
+	foaf:homepage <http://open-music-kontrollers.ch> .
+
+# Project
+proj:shells_bells
+	a doap:Project ;
+	doap:maintainer omk:me ;
+	doap:name "Mephisto Bundle" .
+
+shells_bells:channel
+	a lv2:Parameter ;
+	rdfs:range atom:Int ;
+	rdfs:label "Channel" ;
+	rdfs:comment "get/set MIDI channel" ;
+	lv2:minimum 0 ;
+	lv2:maximum 15 .
+shells_bells:note
+	a lv2:Parameter ;
+	rdfs:range atom:Int ;
+	rdfs:label "Note" ;
+	rdfs:comment "get/set MIDI note" ;
+	lv2:minimum 0 ;
+	lv2:maximum 127 .
+shells_bells:velocity
+	a lv2:Parameter ;
+	rdfs:range atom:Int ;
+	rdfs:label "Velocity" ;
+	rdfs:comment "get/set MIDI velocity" ;
+	lv2:minimum 0 ;
+	lv2:maximum 127 .
+shells_bells:duration
+	a lv2:Parameter ;
+	rdfs:range atom:Int ;
+	rdfs:label "Duration" ;
+	rdfs:comment "get/set MIDI duration" ;
+	lv2:minimum 0 ;
+	lv2:maximum 10000 ;
+	units:unit units:ms .
+
+shells_bells:bells
+	a lv2:Plugin ,
+		lv2:GeneratorPlugin ;
+	doap:name "sHells Bells" ;
+	doap:license lic:Artistic-2.0 ;
+	lv2:project proj:shells_bells ;
+	lv2:requiredFeature urid:map, state:loadDefaultState ;
+	lv2:optionalFeature lv2:isLive, lv2:hardRTCapable, state:threadSafeRestore, log:log ;
+	lv2:extensionData	state:interface ;
+
+	lv2:port [
+	  a lv2:InputPort ,
+			atom:AtomPort ;
+		atom:bufferType atom:Sequence ;
+		atom:supports midi:MidiEvent ,
+			patch:Message ;
+		lv2:index 0 ;
+		lv2:symbol "control" ;
+		lv2:name "Control" ;
+		lv2:designation lv2:control ;
+	] , [
+	  a lv2:OutputPort ,
+			atom:AtomPort ;
+		atom:bufferType atom:Sequence ;
+		atom:supports midi:MidiEvent ,
+			patch:Message ;
+		lv2:index 1 ;
+		lv2:symbol "notify" ;
+		lv2:name "Notify" ;
+		lv2:designation lv2:control ;
+	] ;
+
+	patch:writable
+		shells_bells:channel ,
+		shells_bells:note ,
+		shells_bells:velocity ,
+		shells_bells:duration ;
+
+	state:state [
+		shells_bells:channel "0"^^xsd:int ;
+		shells_bells:note "60"^^xsd:int ;
+		shells_bells:velocity "127"^^xsd:int ;
+		shells_bells:duration "1000"^^xsd:int ;
+	] .
