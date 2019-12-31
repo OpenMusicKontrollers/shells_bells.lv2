@@ -47,13 +47,13 @@ stages:
 x86_64-linux-gnu-bullseye:
   before_script:
     - apt-get update
-    - apt-get install -y faust faust-common libfaust2
+    - apt-get install -y libvterm
   <<: *universal_linux_definition_bullseye
 
 i686-linux-gnu-bullseye:
   before_script:
     - apt-get update
-    - apt-get install -y faust:i386 faust-common:i386 libfaust2:i386
+    - apt-get install -y libvterm-dev:i386
   <<: *universal_linux_definition_bullseye
 
 #arm-linux-gnueabihf-bullseye:
