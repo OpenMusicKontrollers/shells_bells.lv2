@@ -72,6 +72,17 @@ is played back on its DSP side.
 	ninja test
 	sudo ninja install
 
+#### UI
+
+On hi-DPI displays, the UI scales automatically if you have set the correct DPI
+in your ~/.Xresources.
+
+    Xft.dpi: 200
+
+If not, you can manually set your DPI via environmental variable *D2TK_SCALE*:
+
+    export D2TK_SCALE=200
+
 #### License
 
 Copyright (c) 2019-2020 Hanspeter Portner (dev@open-music-kontrollers.ch)

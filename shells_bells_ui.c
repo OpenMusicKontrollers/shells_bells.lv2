@@ -33,9 +33,6 @@
 #include <d2tk/hash.h>
 #include <d2tk/frontend_pugl.h>
 
-#define HEADER 32
-#define FOOTER 64
-
 typedef struct _plughandle_t plughandle_t;
 
 struct _plughandle_t {
@@ -63,6 +60,10 @@ struct _plughandle_t {
 	LV2_URID shells_bells_velocity;
 	LV2_URID shells_bells_duration;
 	LV2_URID shells_bells_trigger;
+
+	d2tk_coord_t header_height;
+	d2tk_coord_t footer_height;
+	d2tk_coord_t font_height;
 
 	int done;
 };
@@ -158,8 +159,6 @@ _expose_header(plughandle_t *handle, const d2tk_rect_t *rect)
 	}
 }
 
-#define FONT_HEIGHT 16 //FIXME
-
 static inline void
 _expose_term(plughandle_t *handle, const d2tk_rect_t *rect)
 {
@@ -174,7 +173,7 @@ _expose_term(plughandle_t *handle, const d2tk_rect_t *rect)
 	};
 
 	const d2tk_state_t state = d2tk_base_pty(base, D2TK_ID, NULL, args,
-		FONT_HEIGHT, rect, false);
+		handle->font_height, rect, false);
 
 	if(d2tk_state_is_close(state))
 	{
@@ -263,7 +262,7 @@ _expose(void *data, d2tk_coord_t w, d2tk_coord_t h)
 	plughandle_t *handle = data;
 	const d2tk_rect_t rect = D2TK_RECT(0, 0, w, h);
 
-	const d2tk_coord_t frac [3] = { HEADER, 0, FOOTER };
+	const d2tk_coord_t frac [3] = { handle->header_height, 0, handle->footer_height};
 	D2TK_BASE_LAYOUT(&rect, 3, frac, D2TK_FLAG_LAYOUT_Y_ABS, lay)
 	{
 		const unsigned k = d2tk_layout_get_index(lay);
@@ -385,6 +384,11 @@ instantiate(const LV2UI_Descriptor *descriptor,
 		free(handle);
 		return NULL;
 	}
+
+	const float scale = d2tk_pugl_get_scale(handle->dpugl);
+	handle->header_height = 32 * scale;
+	handle->footer_height = 64 * scale;
+	handle->font_height = 16 * scale;
 
 	if(host_resize)
 	{
