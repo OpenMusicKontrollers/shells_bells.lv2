@@ -1,6 +1,6 @@
 ## Shells Bells
 
-### a just-for-fun LV2 plugin bundle
+### A just-for-fun LV2 plugin bundle
 
 The most limited, useless, hackable and fun plugin bundle ever. Sound the bell in the shell
 (or from any program forked from the latter) to send a MIDI note.
