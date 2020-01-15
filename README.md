@@ -2,14 +2,13 @@
 
 ### a just-for-fun LV2 plugin bundle
 
-Its main purpose is to test the [d2tk](https://git.open-music-kontrollers.ch/lad/d2tk)
-tool kit inside an LV2 plugin UI.
+The most limited, useless, hackable and fun plugin bundle ever. Sound the bell in the shell
+(or from any program forked from the latter) to send a MIDI note.
 
 #### Build status
 
 [![build status](https://gitlab.com/OpenMusicKontrollers/shells_bells.lv2/badges/master/build.svg)](https://gitlab.com/OpenMusicKontrollers/shells_bells.lv2/commits/master)
 
-<!--
 ### Binaries
 
 For GNU/Linux (64-bit, 32-bit).
@@ -25,15 +24,12 @@ folder out of the platform folder of the downloaded package into your
 #### Unstable (nightly) release
 
 * [shells_bells.lv2-latest-unstable.zip](https://dl.open-music-kontrollers.ch/shells_bells.lv2/unstable/shells_bells.lv2-latest-unstable.zip) ([sig](https://dl.open-music-kontrollers.ch/shells_bells.lv2/unstable/shells_bells.lv2-latest-unstable.zip.sig))
--->
 
 ### Sources
 
-<!--
 #### Stable release
 
 * [shells_bells.lv2-0.2.0.tar.xz](https://git.open-music-kontrollers.ch/lv2/shells_bells.lv2/snapshot/shells_bells.lv2-0.2.0.tar.xz)
--->
 
 #### Git repository
 
@@ -59,9 +55,26 @@ folder out of the platform folder of the downloaded package into your
 Its UI drops you into a shell and whenever you sound the bell, a MIDI note
 is played back on its DSP side.
 
+#### Dependencies
+
+* [LV2](http://lv2plug.in) (LV2 Plugin Standard)
+* [OpenGl]() (OpenGl)
+* [GLEW]() (GLEW)
+* [VTERM]() (Virtual terminal library)
+
+#### Build / install
+
+	git clone https://git.open-music-kontrollers.ch/lv2/shells_bells.lv2
+	cd shells_bells.lv2
+	meson build
+	cd build
+	ninja -j4
+	ninja test
+	sudo ninja install
+
 #### License
 
-Copyright (c) 2019 Hanspeter Portner (dev@open-music-kontrollers.ch)
+Copyright (c) 2019-2020 Hanspeter Portner (dev@open-music-kontrollers.ch)
 
 This is free software: you can redistribute it and/or modify
 it under the terms of the Artistic License 2.0 as published by

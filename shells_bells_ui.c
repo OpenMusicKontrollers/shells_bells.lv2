@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Hanspeter Portner (dev@open-music-kontrollers.ch)
+ * Copyright (c) 2019-2020 Hanspeter Portner (dev@open-music-kontrollers.ch)
  *
  * This is free software: you can redistribute it and/or modify
  * it under the terms of the Artistic License 2.0 as published by
@@ -146,7 +146,7 @@ _expose_header(plughandle_t *handle, const d2tk_rect_t *rect)
 			} break;
 			case 1:
 			{
-				d2tk_base_label(base, -1, "sHells•Bells", 1.f, lrect,
+				d2tk_base_label(base, -1, "SHells•Bells", 1.f, lrect,
 					D2TK_ALIGN_CENTER | D2TK_ALIGN_TOP);
 			} break;
 			case 2:
