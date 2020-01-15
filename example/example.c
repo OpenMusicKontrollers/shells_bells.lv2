@@ -26,7 +26,7 @@
 #include <d2tk/frontend_pugl.h>
 #include "example/example.h"
 
-#if !defined(_WIN32) && !defined(__APPLE__)
+#if D2TK_EVDEV
 #	include <libevdev/libevdev.h>
 #	include <libevdev/libevdev-uinput.h>
 
@@ -70,6 +70,8 @@ typedef enum _bar_t {
 #endif
 #if !defined(_WIN32) && !defined(__APPLE__)
 	BAR_BROWSER,
+#endif
+#if D2TK_EVDEV
 	BAR_KEYBOARD,
 #endif
 
@@ -93,6 +95,8 @@ static const char *bar_lbl [BAR_MAX] = {
 #endif
 #if !defined(_WIN32) && !defined(__APPLE__)
 	[BAR_BROWSER]    = "Browser",
+#endif
+#if D2TK_EVDEV
 	[BAR_KEYBOARD]   = "Keyboard"
 #endif
 };
@@ -1154,7 +1158,9 @@ _render_c_browser(d2tk_base_t *base, const d2tk_rect_t *rect)
 	_file_list_free(list);
 #undef M
 }
+#endif
 
+#if D2TK_EVDEV
 static void
 _fake_event(unsigned type, unsigned code, int value)
 {
@@ -1655,7 +1661,7 @@ _render_c_keyboard(d2tk_base_t *base, const d2tk_rect_t *rect)
 D2TK_API int
 d2tk_example_init(void)
 {
-#if !defined(_WIN32) && !defined(__APPLE__)
+#if D2TK_EVDEV
 	fake.dev = libevdev_new();
 	if(!fake.dev)
 	{
@@ -1687,7 +1693,7 @@ d2tk_example_init(void)
 D2TK_API void
 d2tk_example_deinit(void)
 {
-#if !defined(_WIN32) && !defined(__APPLE__)
+#if D2TK_EVDEV
 	if(fake.uidev)
 	{
 		libevdev_uinput_destroy(fake.uidev);
@@ -1784,6 +1790,8 @@ d2tk_example_run(d2tk_base_t *base, d2tk_coord_t w, d2tk_coord_t h)
 					{
 						_render_c_browser(base, vrect);
 					} break;
+#endif
+#if D2TK_EVDEV
 					case BAR_KEYBOARD:
 					{
 						_render_c_keyboard(base, vrect);

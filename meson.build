@@ -99,6 +99,18 @@ else
 	conf_data.set('D2TK_PTY', 0)
 endif
 
+if evdev_dep.found()
+	conf_data.set('D2TK_EVDEV', 1)
+else
+	conf_data.set('D2TK_EVDEV', 0)
+endif
+
+if input_dep.found() and input_dep.version().version_compare('>=1.15.0')
+	conf_data.set('D2TK_INPUT_1_15', 1)
+else
+	conf_data.set('D2TK_INPUT_1_15', 0)
+endif
+
 bin_srcs = [
 	join_paths('example', 'example.c')
 ]
@@ -184,7 +196,7 @@ if freetype_dep.found() and pixman_dep.found() and cairo_dep.found() and cairo_x
 		dependencies: d2tk_cairo,
 		install : false)
 
-	if input_dep.found() and udev_dep.found()
+	if input_dep.found() and udev_dep.found() and evdev_dep.found()
 		d2tk_fbdev = declare_dependency(
 			include_directories : inc_dir,
 			dependencies : [deps, freetype_dep, pixman_dep, cairo_dep, input_dep, udev_dep],
