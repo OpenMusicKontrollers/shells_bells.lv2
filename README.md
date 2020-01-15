@@ -44,9 +44,7 @@ folder out of the platform folder of the downloaded package into your
 ### Bugs and feature requests
 
 * [Gitlab](https://gitlab.com/OpenMusicKontrollers/shells_bells.lv2)
-<!--
 * [Github](https://github.com/OpenMusicKontrollers/shells_bells.lv2)
--->
 
 #### Plugins
 
@@ -60,9 +58,9 @@ is played back on its DSP side.
 #### Dependencies
 
 * [LV2](http://lv2plug.in) (LV2 Plugin Standard)
-* [OpenGl]() (OpenGl)
-* [GLEW]() (GLEW)
-* [VTERM]() (Virtual terminal library)
+* [OpenGl](https://www.opengl.org) (OpenGl)
+* [GLEW](http://glew.sourceforge.net) (GLEW)
+* [VTERM](http://www.leonerd.org.uk/code/libvterm) (Virtual terminal emulator)
 
 #### Build / install
 
