@@ -3,7 +3,7 @@ project('shells_bells.lv2', 'c', default_options : [
 	'warning_level=3',
 	'werror=false',
 	'b_lto=false',
-	'c_std=c11'])
+	'c_std=gnu11'])
 
 d2tk = subproject('d2tk')
 
@@ -28,15 +28,10 @@ lv2_validate = find_program('lv2_validate', native : true, required : false)
 sord_validate = find_program('sord_validate', native : true, required : false)
 lv2lint = find_program('lv2lint', required : false)
 
-m_dep = cc.find_library('m')
 lv2_dep = dependency('lv2', version : '>=1.14.0')
-util_dep = cc.find_library('util')
-rt_dep = cc.find_library('rt')
-thread_dep = dependency('threads')
-vterm_dep = dependency('vterm', version : '>=0.1')
 
-dsp_deps = [m_dep, lv2_dep]
-ui_deps = [lv2_dep, d2tk_dep, rt_dep, vterm_dep, thread_dep]
+dsp_deps = [lv2_dep]
+ui_deps = [lv2_dep, d2tk_dep]
 
 props_inc = include_directories('props.lv2')
 ser_inc = include_directories('ser_atom.lv2')
@@ -49,8 +44,7 @@ dsp_srcs = ['shells_bells.c']
 
 ui_srcs = ['shells_bells_ui.c']
 
-c_args = ['-fvisibility=hidden',
-	'-ffast-math']
+c_args = ['-fvisibility=hidden']
 
 version = run_command('cat', 'VERSION').stdout().strip().split('.')
 add_project_arguments('-DSHELLS_BELLS_VERSION="'
@@ -131,7 +125,9 @@ endif
 
 if lv2lint.found()
 	test('LV2 lint', lv2lint,
-		args : [ '-I', join_paths(build_root, ''),
+		args : ['-M', 'pack',
+			'-E', 'warn',
+			'-I', join_paths(build_root, ''),
 			'http://open-music-kontrollers.ch/lv2/shells_bells#bells'
 		])
 endif
