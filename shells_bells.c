@@ -95,7 +95,6 @@ _disable_bell(plughandle_t *handle, int64_t frames)
 	handle->last_remaining = 0;
 }
 
-
 static void
 _enable_bell(plughandle_t *handle, int64_t frames)
 {
@@ -131,6 +130,40 @@ _intercept_trigger(void *data, int64_t frames,
 
 	handle->state.trigger = false;
 }
+
+static const props_def_t defs [MAX_NPROPS] = {
+	{
+		.property = SHELLS_BELLS__channel,
+		.offset = offsetof(plugstate_t, channel),
+		.type = LV2_ATOM__Int
+	},
+	{
+		.property = SHELLS_BELLS__note,
+		.offset = offsetof(plugstate_t, note),
+		.type = LV2_ATOM__Int
+	},
+	{
+		.property = SHELLS_BELLS__velocity,
+		.offset = offsetof(plugstate_t, velocity),
+		.type = LV2_ATOM__Int
+	},
+	{
+		.property = SHELLS_BELLS__duration,
+		.offset = offsetof(plugstate_t, duration),
+		.type = LV2_ATOM__Int
+	},
+	{
+		.property = SHELLS_BELLS__trigger,
+		.offset = offsetof(plugstate_t, trigger),
+		.type = LV2_ATOM__Bool,
+		.event_cb = _intercept_trigger,
+	},
+	{
+		.property = SHELLS_BELLS__fontHeight,
+		.offset = offsetof(plugstate_t, font_height),
+		.type = LV2_ATOM__Int
+	}
+};
 
 static LV2_Handle
 instantiate(const LV2_Descriptor* descriptor, double rate,

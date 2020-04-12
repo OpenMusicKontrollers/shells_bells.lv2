@@ -48,6 +48,13 @@ proj:shells_bells
 	doap:maintainer omk:me ;
 	doap:name "Mephisto Bundle" .
 
+# Units
+shells_bells:px
+	a units:Unit ;
+	rdfs:label "pixels" ;
+	units:render "%f px" ;
+	units:symbol "px" .
+
 shells_bells:channel
 	a lv2:Parameter ;
 	rdfs:range atom:Int ;
@@ -77,6 +84,14 @@ shells_bells:duration
 	lv2:minimum 0 ;
 	lv2:maximum 10000 ;
 	units:unit units:ms .
+shells_bells:fontHeight
+	a lv2:Parameter ;
+	rdfs:range atom:Int ;
+	rdfs:label "Font height" ;
+	rdfs:comment "get/set font height in px" ;
+	lv2:minimum 10 ;
+	lv2:maximum 25 ;
+	units:unit shells_bells:px .
 
 shells_bells:bells
 	a lv2:Plugin ,
@@ -114,11 +129,13 @@ shells_bells:bells
 		shells_bells:channel ,
 		shells_bells:note ,
 		shells_bells:velocity ,
+		shells_bells:fontHeight ,
 		shells_bells:duration ;
 
 	state:state [
 		shells_bells:channel "0"^^xsd:int ;
 		shells_bells:note "60"^^xsd:int ;
 		shells_bells:velocity "127"^^xsd:int ;
+		shells_bells:fontHeight "16"^^xsd:int ;
 		shells_bells:duration "1000"^^xsd:int ;
 	] .

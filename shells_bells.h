@@ -53,8 +53,9 @@
 #define SHELLS_BELLS__velocity      SHELLS_BELLS_PREFIX "velocity"
 #define SHELLS_BELLS__duration      SHELLS_BELLS_PREFIX "duration"
 #define SHELLS_BELLS__trigger       SHELLS_BELLS_PREFIX "trigger"
+#define SHELLS_BELLS__fontHeight    SHELLS_BELLS_PREFIX "fontHeight"
 
-#define MAX_NPROPS 5
+#define MAX_NPROPS 6
 
 typedef struct _plugstate_t plugstate_t;
 
@@ -64,38 +65,7 @@ struct _plugstate_t {
 	int32_t velocity;
 	int32_t duration;
 	int32_t trigger;
-};
-
-static void
-_intercept_trigger(void *data, int64_t frames, props_impl_t *impl);
-
-static const props_def_t defs [MAX_NPROPS] = {
-	{
-		.property = SHELLS_BELLS__channel,
-		.offset = offsetof(plugstate_t, channel),
-		.type = LV2_ATOM__Int
-	},
-	{
-		.property = SHELLS_BELLS__note,
-		.offset = offsetof(plugstate_t, note),
-		.type = LV2_ATOM__Int
-	},
-	{
-		.property = SHELLS_BELLS__velocity,
-		.offset = offsetof(plugstate_t, velocity),
-		.type = LV2_ATOM__Int
-	},
-	{
-		.property = SHELLS_BELLS__duration,
-		.offset = offsetof(plugstate_t, duration),
-		.type = LV2_ATOM__Int
-	},
-	{
-		.property = SHELLS_BELLS__trigger,
-		.offset = offsetof(plugstate_t, trigger),
-		.type = LV2_ATOM__Bool,
-		.event_cb = _intercept_trigger,
-	}
+	int32_t font_height;
 };
 
 #endif // _SHELLS_BELLS_LV2_H
