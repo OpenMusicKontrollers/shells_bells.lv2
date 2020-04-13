@@ -19,7 +19,7 @@ folder out of the platform folder of the downloaded package into your
 
 #### Stable release
 
-* [shells_bells.lv2-0.2.0.zip](https://dl.open-music-kontrollers.ch/shells_bells.lv2/stable/shells_bells.lv2-0.2.0.zip) ([sig](https://dl.open-music-kontrollers.ch/shells_bells.lv2/stable/shells_bells.lv2-0.2.0.zip.sig))
+* [shells_bells.lv2-0.4.0.zip](https://dl.open-music-kontrollers.ch/shells_bells.lv2/stable/shells_bells.lv2-0.4.0.zip) ([sig](https://dl.open-music-kontrollers.ch/shells_bells.lv2/stable/shells_bells.lv2-0.4.0.zip.sig))
 
 #### Unstable (nightly) release
 
@@ -29,7 +29,7 @@ folder out of the platform folder of the downloaded package into your
 
 #### Stable release
 
-* [shells_bells.lv2-0.2.0.tar.xz](https://git.open-music-kontrollers.ch/lv2/shells_bells.lv2/snapshot/shells_bells.lv2-0.2.0.tar.xz)
+* [shells_bells.lv2-0.4.0.tar.xz](https://git.open-music-kontrollers.ch/lv2/shells_bells.lv2/snapshot/shells_bells.lv2-0.4.0.tar.xz)
 
 #### Git repository
 

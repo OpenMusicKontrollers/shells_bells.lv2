@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.4.0] - 13 Apr 2020
+
+### Changed
+
+* to build with pugl master
+* to use spinners instead of dials
+* to automagically adapt color theme to terminal colors
+
 ## [0.2.0] - 15 Jan 2020
 
 ### Initial release
