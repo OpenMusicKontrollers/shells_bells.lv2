@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0] - 15 Jul 2020
+
+### Added
+
+* forkpty wrapper which uses clone or vfork instead of fork
+* support for GL double buffering
+
 ## [0.4.0] - 13 Apr 2020
 
 ### Changed
