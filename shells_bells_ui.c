@@ -300,58 +300,32 @@ _expose_duration(plughandle_t *handle, const d2tk_rect_t *rect)
 static inline void
 _expose_footer(plughandle_t *handle, const d2tk_rect_t *rect)
 {
-	d2tk_frontend_t *dpugl = handle->dpugl;
-	d2tk_base_t *base = d2tk_frontend_get_base(dpugl);
-
-	D2TK_BASE_TABLE(rect, 5, 2, D2TK_FLAG_TABLE_REL, tab)
+	D2TK_BASE_TABLE(rect, 5, 1, D2TK_FLAG_TABLE_REL, tab)
 	{
 		const unsigned x = d2tk_table_get_index_x(tab);
-		const unsigned y = d2tk_table_get_index_y(tab);
 		const d2tk_rect_t *trect = d2tk_table_get_rect(tab);
 
-		switch(y)
+		switch(x)
 		{
 			case 0:
 			{
-				static const char *lbls [5] = {
-					"channel",
-					"note",
-					"velocity",
-					"duration•ms",
-					"font-height•px",
-				};
-
-				if(lbls[x])
-				{
-					d2tk_base_label(base, -1, lbls[x], 0.5f, trect,
-						D2TK_ALIGN_MIDDLE | D2TK_ALIGN_RIGHT);
-				}
+				_expose_channel(handle, trect);
 			} break;
 			case 1:
 			{
-				switch(x)
-				{
-					case 0:
-					{
-						_expose_channel(handle, trect);
-					} break;
-					case 1:
-					{
-						_expose_note(handle, trect);
-					} break;
-					case 2:
-					{
-						_expose_velocity(handle, trect);
-					} break;
-					case 3:
-					{
-						_expose_duration(handle, trect);
-					} break;
-					case 4:
-					{
-						_expose_font_height(handle, trect);
-					} break;
-				}
+				_expose_note(handle, trect);
+			} break;
+			case 2:
+			{
+				_expose_velocity(handle, trect);
+			} break;
+			case 3:
+			{
+				_expose_duration(handle, trect);
+			} break;
+			case 4:
+			{
+				_expose_font_height(handle, trect);
 			} break;
 		}
 	}
@@ -614,7 +588,7 @@ instantiate(const LV2UI_Descriptor *descriptor,
 
 	handle->scale = d2tk_frontend_get_scale(handle->dpugl);
 	handle->header_height = 32 * handle->scale;
-	handle->footer_height = 64 * handle->scale;
+	handle->footer_height = 32 * handle->scale;
 	handle->sidebar_width = 1 * handle->scale;
 
 	handle->state.font_height = 16;
@@ -674,11 +648,6 @@ static int
 _idle(LV2UI_Handle instance)
 {
 	plughandle_t *handle = instance;
-
-	d2tk_base_t *base = d2tk_frontend_get_base(handle->dpugl);
-	d2tk_style_t style = *d2tk_base_get_default_style(base);
-	style.font_face = "FiraCode:regular";
-	d2tk_base_set_style(base, &style);
 
 	if(d2tk_frontend_step(handle->dpugl))
 	{
