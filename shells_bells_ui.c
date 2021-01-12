@@ -230,7 +230,7 @@ _expose_channel(plughandle_t *handle, const d2tk_rect_t *rect)
 	static const char lbl [] = "channel";
 
 	if(d2tk_base_spinner_int32_is_changed(base, D2TK_ID, rect,
-		sizeof(lbl), lbl, 0x0, &handle->state.channel, 0xf))
+		sizeof(lbl), lbl, 0x0, &handle->state.channel, 0xf, D2TK_FLAG_NONE))
 	{
 		_message_set_key(handle, handle->urid_channel);
 	}
@@ -245,7 +245,7 @@ _expose_note(plughandle_t *handle, const d2tk_rect_t *rect)
 	static const char lbl [] = "note";
 
 	if(d2tk_base_spinner_int32_is_changed(base, D2TK_ID, rect,
-		sizeof(lbl), lbl, 0x0, &handle->state.note, 0x7f))
+		sizeof(lbl), lbl, 0x0, &handle->state.note, 0x7f, D2TK_FLAG_NONE))
 	{
 		_message_set_key(handle, handle->urid_note);
 	}
@@ -260,7 +260,7 @@ _expose_velocity(plughandle_t *handle, const d2tk_rect_t *rect)
 	static const char lbl [] = "velocity";
 
 	if(d2tk_base_spinner_int32_is_changed(base, D2TK_ID, rect,
-		sizeof(lbl), lbl, 0x0, &handle->state.velocity, 0x7f))
+		sizeof(lbl), lbl, 0x0, &handle->state.velocity, 0x7f, D2TK_FLAG_NONE))
 	{
 		_message_set_key(handle, handle->urid_velocity);
 	}
@@ -275,7 +275,7 @@ _expose_font_height(plughandle_t *handle, const d2tk_rect_t *rect)
 	static const char lbl [] = "font-height•px";
 
 	if(d2tk_base_spinner_int32_is_changed(base, D2TK_ID, rect,
-		sizeof(lbl), lbl, 10, &handle->state.font_height, 25))
+		sizeof(lbl), lbl, 10, &handle->state.font_height, 25, D2TK_FLAG_NONE))
 	{
 		_message_set_key(handle, handle->urid_fontHeight);
 		_update_font_height(handle);
@@ -291,7 +291,7 @@ _expose_duration(plughandle_t *handle, const d2tk_rect_t *rect)
 	static const char lbl [] = "duration•ms";
 
 	if(d2tk_base_spinner_int32_is_changed(base, D2TK_ID, rect,
-		sizeof(lbl), lbl, 0, &handle->state.duration, 10000))
+		sizeof(lbl), lbl, 0, &handle->state.duration, 10000, D2TK_FLAG_NONE))
 	{
 		_message_set_key(handle, handle->urid_duration);
 	}
