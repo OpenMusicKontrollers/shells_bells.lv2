@@ -11,7 +11,7 @@ The most limited, useless, hackable and fun plugin bundle ever. Sound the bell i
 
 ### Binaries
 
-For GNU/Linux (64-bit, 32-bit).
+For GNU/Linux (84-bit, 32-bit).
 
 To install the plugin bundle on your system, simply copy the __shells_bells.lv2__
 folder out of the platform folder of the downloaded package into your
@@ -19,7 +19,7 @@ folder out of the platform folder of the downloaded package into your
 
 #### Stable release
 
-* [shells_bells.lv2-0.6.0.zip](https://dl.open-music-kontrollers.ch/shells_bells.lv2/stable/shells_bells.lv2-0.6.0.zip) ([sig](https://dl.open-music-kontrollers.ch/shells_bells.lv2/stable/shells_bells.lv2-0.6.0.zip.sig))
+* [shells_bells.lv2-0.8.0.zip](https://dl.open-music-kontrollers.ch/shells_bells.lv2/stable/shells_bells.lv2-0.8.0.zip) ([sig](https://dl.open-music-kontrollers.ch/shells_bells.lv2/stable/shells_bells.lv2-0.8.0.zip.sig))
 
 #### Unstable (nightly) release
 
@@ -29,8 +29,8 @@ folder out of the platform folder of the downloaded package into your
 
 #### Stable release
 
-* [shells_bells.lv2-0.6.0.tar.xz](https://git.open-music-kontrollers.ch/lv2/shells_bells.lv2/snapshot/shells_bells.lv2-0.6.0.tar.xz)
-([sig](https://git.open-music-kontrollers.ch/lv2/shells_bells.lv2/snapshot/shells_bells.lv2-0.6.0.tar.xz.asc))
+* [shells_bells.lv2-0.8.0.tar.xz](https://git.open-music-kontrollers.ch/lv2/shells_bells.lv2/snapshot/shells_bells.lv2-0.8.0.tar.xz)
+([sig](https://git.open-music-kontrollers.ch/lv2/shells_bells.lv2/snapshot/shells_bells.lv2-0.8.0.tar.xz.asc))
 
 #### Git repository
 
@@ -86,7 +86,7 @@ If not, you can manually set your DPI via environmental variable *D2TK_SCALE*:
 
 #### License
 
-Copyright (c) 2019-2020 Hanspeter Portner (dev@open-music-kontrollers.ch)
+Copyright (c) 2019-2021 Hanspeter Portner (dev@open-music-kontrollers.ch)
 
 This is free software: you can redistribute it and/or modify
 it under the terms of the Artistic License 2.0 as published by
