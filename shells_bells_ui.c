@@ -24,6 +24,8 @@
 #include <sys/stat.h>
 #include <time.h>
 #include <utime.h>
+#include <limits.h>
+#include <wordexp.h>
 
 #include <shells_bells.h>
 #include <props.h>
@@ -87,6 +89,8 @@ struct _plughandle_t {
 	uint32_t max_red;
 
 	int done;
+
+	wordexp_t wordexp;
 };
 
 static inline void
@@ -337,14 +341,9 @@ _expose_term(plughandle_t *handle, const d2tk_rect_t *rect)
 	d2tk_frontend_t *dpugl = handle->dpugl;
 	d2tk_base_t *base = d2tk_frontend_get_base(dpugl);
 
-	char *editor = getenv("SHELL");
+	char **args = handle->wordexp.we_wordv;
 
-	char *args [] = {
-		editor ? editor : "/bin/sh",
-		NULL
-	};
-
-	d2tk_flag_t flag = D2TK_FLAG_NONE;
+	d2tk_flag_t flag = D2TK_FLAG_PTY_NOMOUSE;
 	if(handle->reinit)
 	{
 		flag |= D2TK_FLAG_PTY_REINIT;
@@ -579,6 +578,18 @@ instantiate(const LV2UI_Descriptor *descriptor,
 		return NULL;
 	}
 
+	static const char *fallback= "sh";
+	const char *shell = getenv("SHELL");
+	char cmdline [PATH_MAX];
+	snprintf(cmdline, sizeof(cmdline), "%s",
+			shell ? shell : fallback);
+	if(wordexp(cmdline, &handle->wordexp, WRDE_NOCMD) != 0)
+	{
+		fprintf(stderr, "failed to parse EDITOR");
+		free(handle);
+		return NULL;
+	}
+
 	handle->controller = controller;
 	handle->writer = write_function;
 
@@ -651,6 +662,8 @@ cleanup(LV2UI_Handle instance)
 	plughandle_t *handle = instance;
 
 	d2tk_frontend_free(handle->dpugl);
+
+	wordfree(&handle->wordexp);
 
 	free(handle);
 }
