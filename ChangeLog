@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.10.0] - 14 Apr 2021
+
+### Fixed
+
+* license URI in turtle manifest
+* pseudo terminal mouse support discovery
+* SHELL environment variable parsing
+* termination of spawned processes
+
+### Added
+
+* missing ui:parent feature in turtle manifest
+* cloning of parent environment
+* missing signal header include
+
+### Updated
+
+* to latest pugl
+
 ## [0.8.0] - 15 Jan 2021
 
 ### Added
